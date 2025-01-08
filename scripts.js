@@ -1,10 +1,10 @@
-// Smooth Scroll with Highlighted Menu
+
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.nav-button');
 const header = document.querySelector('.main-header');
 let lastScrollPosition = 0;
 
-// Highlight Current Section in Nav
+
 window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach((section) => {
@@ -22,7 +22,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Smooth Scroll Effect
+
 navLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
         event.preventDefault();
@@ -31,7 +31,7 @@ navLinks.forEach((link) => {
     });
 });
 
-// Hide Header on Scroll Down, Show on Scroll Up
+
 window.addEventListener('scroll', () => {
     const currentScrollPosition = window.pageYOffset;
 
