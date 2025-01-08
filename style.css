@@ -17,7 +17,7 @@ body {
     top: 0;
     width: 100%;
     z-index: 1000;
-    transition: transform 0.3s ease-in-out; /* Smooth hide/show transition */
+    transition: transform 0.3s ease-in-out; 
 }
 
 
@@ -142,7 +142,7 @@ main {
     transition: background-color 0.3s ease;
 }
 #about {
-    margin-top: 350px; /* Adjust this value to push the section further down */
+    margin-top: 350px; 
 }
 
 .project-link:hover {
