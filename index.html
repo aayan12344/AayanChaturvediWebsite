@@ -3,81 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aayan Chaturvedi</title>
+    <title>Aayan Chaturvedi - Computer Science Student</title>
     <link rel="stylesheet" href="style.css">
     <script src="scripts.js" defer></script>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="header-top">
-            <div class="contact-info">
-                <p><a href="mailto:chaturvediaa22@vt.edu"></a></p>
-                <p></p>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Home</a>
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#resume" class="nav-link">Resume</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
-        <h1>Aayan Chaturvedi</h1>
-        <img src="images/image.jpg" alt="Aayan Chaturvedi" class="profile-image">
-        <nav>
-            <ul>
-                <li><a href="#about" class="nav-button">About</a></li>
-                <li><a href="#contact" class="nav-button">Contact</a></li>
-                <li><a href="#projects" class="nav-button">Projects</a></li>
-                <li><a href="#resume" class="nav-button">Resume</a></li>
-            </ul>
-        </nav>
-    </header>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Aayan Chaturvedi</h1>
+                <p class="hero-subtitle">Computer Science Student | Cybersecurity & AI Specialist</p>
+                <p class="hero-description">Dedicated Computer Science student at Virginia Tech specializing in Cybersecurity, Artificial Intelligence, and Data Analytics. Passionate about leveraging technology to solve complex problems and drive innovation.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/image.jpg" alt="Aayan Chaturvedi" class="profile-image">
+            </div>
+        </div>
+    </section>
 
     <main>
-        <section id="about" class="content-box">
-            <h2>About Me</h2>
-            <p>I am a dedicated and driven Computer Science student at Virginia Tech, specializing in Cybersecurity, Artificial Intelligence, and Data Analytics. With a consistent track record of academic excellence, as evidenced by my place on the Dean's List since Spring 2023, I have built a strong foundation in programming, system design, and advanced computational methods. My passion lies in leveraging technology to solve complex problems, particularly in the domains of data processing, natural language understanding, and secure system development.</p>
-        
-            <p>Throughout my journey, I have gained valuable hands-on experience through internships and leadership roles. As an intern at Abeyon LLC, I spearheaded the automation of processing over 300 GB of patent data, enabling the extraction of critical insights and reverse engineering of a patent search engine. I also developed a natural language question-answering system using Python and Whoosh, and applied cutting-edge NLP techniques with Mistral AI to enhance data analysis processes. My ability to collaborate with colleagues in agile environments has further refined my skills in project management and seamless integration of advanced technologies.</p>
-           <p>Beyond technical expertise, I have honed my leadership capabilities as an active member of Lambda Phi Epsilon Fraternity at Virginia Tech. From successfully raising funds for charitable causes to developing risk assessment frameworks for event management, my roles have taught me the importance of teamwork, strategic planning, and community impact. Additionally, my experience as a Math, Reading, and Computer Science instructor at Kumon Math & Reading Center has equipped me with the ability to communicate complex concepts effectively, a skill I bring to both technical and non-technical collaborations.</p>
-        </section>
-
-        <section id="contact" class="content-box">
-            <h2>Contact Information</h2>
-            <ul>
-                <li>Email: <a href="mailto:chaturvediaa22@vt.edu">chaturvediaa22@vt.edu</a></li>
-                <li>Phone: (203)-540-7777</li>
-                <li>LinkedIn: <a href="https://www.linkedin.com/in/aayan-chaturvedi-81435a231/" target="_blank">Aayan Chaturvedi</a></li>
-            </ul>
-        </section>
-
-        <section id="projects" class="content-box">
-            <h2>Highlighted Projects</h2>
-            <div class="project-grid">
-                <!-- Hokie Helper Project Card -->
-                <div class="project-card">
-                    <h3>Hokie Helper</h3>
-                    <p>Designed web applications to enhance guided study aids for Virginia Tech students in specific courses. Utilized HTML, CSS, Python, and C for implementation.</p>
-                    <a href="https://github.com/mcarr2k/HokieHelper.git" target="_blank" class="project-link">GitHub Repository</a>
-                </div>
-                <!-- Personal Website Project Card -->
-                <div class="project-card">
-                    <h3>Personal Website</h3>
-                    <p>Developed a personal website using HTML, CSS, and JavaScript with a focus on responsive design principles for enhanced user experience.</p>
-                    <a href="#" class="project-link">View Site</a>
-                </div>
-                <!-- Uni Hub Project Card -->
-                <div class="project-card">
-                    <h3>Uni Hub</h3>
-                    <p>Created a centralized hub for easier access to Virginia Tech resources. Built the backend using Node.js and MongoDB.</p>
-                    <a href="https://github.com/mcarr2k/UniHelper" target="_blank" class="project-link">GitHub Repository</a>
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Passionate about technology and innovation</p>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>I am a dedicated and driven Computer Science student at Virginia Tech, specializing in Cybersecurity, Artificial Intelligence, and Data Analytics. With a consistent track record of academic excellence, as evidenced by my place on the Dean's List since Spring 2023, I have built a strong foundation in programming, system design, and advanced computational methods.</p>
+                        
+                        <p>Throughout my journey, I have gained valuable hands-on experience through internships and leadership roles. As an intern at Abeyon LLC, I spearheaded the automation of processing over 300 GB of patent data, enabling the extraction of critical insights and reverse engineering of a patent search engine.</p>
+                        
+                        <p>Beyond technical expertise, I have honed my leadership capabilities as an active member of Lambda Phi Epsilon Fraternity at Virginia Tech. From successfully raising funds for charitable causes to developing risk assessment frameworks for event management, my roles have taught me the importance of teamwork, strategic planning, and community impact.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="resume" class="content-box">
-            <h2>My Resume</h2>
-            <img src="images/download.jpg" alt="Aayan Chaturvedi's Resume" class="resume-image">
+        <!-- Projects Section -->
+        <section id="projects" class="section" style="background: var(--bg-accent);">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Showcasing my technical skills and creativity</p>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>Hokie Helper</h3>
+                        <p>Designed web applications to enhance guided study aids for Virginia Tech students in specific courses. Utilized HTML, CSS, Python, and C for implementation.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/mcarr2k/HokieHelper.git" target="_blank" class="project-link">GitHub Repository</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Uni Hub</h3>
+                        <p>Created a centralized hub for easier access to Virginia Tech resources. Built the backend using Node.js and MongoDB.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/mcarr2k/UniHelper" target="_blank" class="project-link">GitHub Repository</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's connect and discuss opportunities</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p><a href="mailto:chaturvediaa22@vt.edu">chaturvediaa22@vt.edu</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p>(203) 540-7777</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">💼</div>
+                            <div class="contact-details">
+                                <h4>LinkedIn</h4>
+                                <p><a href="https://www.linkedin.com/in/aayan-chaturvedi-81435a231/" target="_blank">Aayan Chaturvedi</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h3 style="margin-bottom: 1rem; color: var(--text-primary);">Let's Work Together</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">I'm always interested in new opportunities and collaborations. Whether you have a project in mind or just want to chat about technology, feel free to reach out!</p>
+                        <a href="mailto:chaturvediaa22@vt.edu" class="btn btn-primary">Send Message</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="section" style="background: var(--bg-accent);">
+            <div class="container">
+                <h2 class="section-title">My Resume</h2>
+                <p class="section-subtitle">Download or view my detailed resume</p>
+                
+                <div class="resume-container">
+                    <img src="images/download.jpg" alt="Aayan Chaturvedi's Resume" class="resume-image">
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Aayan Chaturvedi. All rights reserved.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#about" class="footer-link">About</a>
+                <a href="#projects" class="footer-link">Projects</a>
+                <a href="#contact" class="footer-link">Contact</a>
+                <a href="#resume" class="footer-link">Resume</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Aayan Chaturvedi. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
