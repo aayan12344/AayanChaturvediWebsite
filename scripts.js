@@ -1,150 +1,179 @@
-// Smooth scrolling and active navigation
-const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.nav-link');
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const navMenu = document.querySelector('.nav-menu');
+const navbar = document.querySelector('.navbar');
+const scrollableContent = document.querySelector('.scrollable-content');
+const mainLayout = document.querySelector('.main-layout');
 
-// Center the About Me section on page load
-window.addEventListener('load', () => {
-    const scrollableContent = document.querySelector('.scrollable-content');
-    const aboutSection = document.getElementById('about');
-    
-    if (scrollableContent && aboutSection) {
-        const scrollTop = aboutSection.offsetTop - (scrollableContent.clientHeight / 2) + (aboutSection.clientHeight / 2);
-        scrollableContent.scrollTop = scrollTop;
+// ─── Sync body padding to exact navbar height (eliminates the gap) ──────────
+
+function syncNavHeight() {
+    const h = navbar.offsetHeight;
+    document.body.style.paddingTop = h + 'px';
+    if (mainLayout) mainLayout.style.height = `calc(100vh - ${h}px)`;
+}
+
+syncNavHeight();
+window.addEventListener('resize', syncNavHeight);
+
+// ─── Scroll target: use .scrollable-content on desktop, window on mobile ───
+
+function getScrollTop() {
+    if (scrollableContent && scrollableContent.scrollHeight > scrollableContent.clientHeight) {
+        return scrollableContent.scrollTop;
     }
+    return window.pageYOffset;
+}
+
+// ─── Center About section on load ──────────────────────────────────────────
+
+window.addEventListener('load', () => {
+    const aboutSection = document.getElementById('about');
+    if (scrollableContent && aboutSection) {
+        const scrollTop = aboutSection.offsetTop
+            - (scrollableContent.clientHeight / 2)
+            + (aboutSection.clientHeight / 2);
+        scrollableContent.scrollTop = Math.max(0, scrollTop);
+    }
+    startTyping();
 });
 
-// Active navigation highlighting
-window.addEventListener('scroll', () => {
+// ─── Active nav highlighting ────────────────────────────────────────────────
+
+function updateActiveNav() {
+    const scrollTop = getScrollTop();
+    const sections = document.querySelectorAll('section[id]');
     let current = '';
-    sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 100;
-        if (window.pageYOffset >= sectionTop) {
+
+    sections.forEach(section => {
+        if (section.offsetTop - 160 <= scrollTop) {
             current = section.getAttribute('id');
         }
     });
 
-    navLinks.forEach((link) => {
+    navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
             link.classList.add('active');
         }
     });
-});
+}
 
-// Smooth scrolling for navigation links
-navLinks.forEach((link) => {
-    link.addEventListener('click', (event) => {
+// ─── Dynamic navbar on scroll ───────────────────────────────────────────────
+
+function handleScroll() {
+    const scrollTop = getScrollTop();
+    const progress = Math.min(scrollTop / 120, 1); // 0 → 1 over first 120px
+
+    // Interpolate background opacity: nearly invisible → solid
+    const bgAlpha   = (0.05 + progress * 0.85).toFixed(3);
+    const blurPx    = (4   + progress * 16).toFixed(1);
+    const borderA   = (0.04 + progress * 0.1).toFixed(3);
+    const shadowA   = (0   + progress * 0.5).toFixed(3);
+
+    navbar.style.background      = `rgba(0, 0, 0, ${bgAlpha})`;
+    navbar.style.backdropFilter  = `blur(${blurPx}px)`;
+    navbar.style.borderBottom    = `1px solid rgba(255, 255, 255, ${borderA})`;
+    navbar.style.boxShadow       = `0 4px 30px rgba(0, 0, 0, ${shadowA})`;
+
+    updateActiveNav();
+}
+
+if (scrollableContent) {
+    scrollableContent.addEventListener('scroll', handleScroll, { passive: true });
+}
+window.addEventListener('scroll', handleScroll, { passive: true });
+
+// Run once on load to set initial state
+handleScroll();
+
+// ─── Smooth scrolling ───────────────────────────────────────────────────────
+
+navLinks.forEach(link => {
+    link.addEventListener('click', event => {
         const href = link.getAttribute('href');
-        // Only prevent default for internal links (anchors)
         if (href && href.startsWith('#')) {
             event.preventDefault();
-            const targetId = href.substring(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            const target = document.getElementById(href.substring(1));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-            // Close mobile menu if open
             navMenu.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
         }
-        // For external links (social), do nothing so browser default works
     });
 });
 
-// Mobile menu toggle
+// ─── Mobile menu ────────────────────────────────────────────────────────────
+
 if (mobileMenuToggle) {
     mobileMenuToggle.addEventListener('click', () => {
         navMenu.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
     });
 }
 
-// Close mobile menu when clicking outside
-document.addEventListener('click', (event) => {
+document.addEventListener('click', event => {
     if (!navMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
         navMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
     }
 });
 
-// Navbar hide/show on scroll with Dark Green Theme
-let lastScrollTop = 0;
-let isScrolling = false;
+// ─── Scroll-reveal animations ───────────────────────────────────────────────
 
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // Always maintain dark green theme when navbar is visible
-    navbar.style.background = 'linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 50%, #2d7a5f 100%)';
-    navbar.style.boxShadow = '0 8px 32px rgba(13, 79, 60, 0.3)';
-    navbar.style.backdropFilter = 'blur(20px)';
-    
-    if (!isScrolling) {
-        window.requestAnimationFrame(() => {
-            if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
-                // Scrolling down - hide navbar
-                navbar.style.transform = 'translateY(-100%)';
-                navbar.style.transition = 'transform 0.3s ease-in-out';
-            } else {
-                // Scrolling up - show navbar
-                navbar.style.transform = 'translateY(0)';
-                navbar.style.transition = 'transform 0.3s ease-in-out';
-            }
-            
-            lastScrollTop = currentScrollTop;
-            isScrolling = false;
-        });
-    }
-    
-    isScrolling = true;
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    root: scrollableContent || null,
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px',
 });
 
-// FPS Counter
-(function() {
-    let lastFrame = performance.now();
-    let frames = 0;
-    let fps = 0;
-    const fpsElem = document.getElementById('stat-fps');
-    function loop(now) {
-        frames++;
-        if (now - lastFrame >= 1000) {
-            fps = frames;
-            frames = 0;
-            lastFrame = now;
-            if (fpsElem) fpsElem.textContent = fps;
-        }
-        requestAnimationFrame(loop);
-    }
-    requestAnimationFrame(loop);
-})();
+document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 
-// Internet Speed Test (simple download test)
-(function() {
-    const speedElem = document.getElementById('stat-speed');
-    async function testSpeed() {
-        const imageUrl = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg?" + Math.random();
-        const startTime = performance.now();
-        try {
-            const response = await fetch(imageUrl, { method: 'GET', cache: 'no-store' });
-            const reader = response.body.getReader();
-            let received = 0;
-            while(true) {
-                const {done, value} = await reader.read();
-                if (done) break;
-                received += value.length;
-            }
-            const endTime = performance.now();
-            const duration = (endTime - startTime) / 1000;
-            const bitsLoaded = received * 8;
-            const speedMbps = (bitsLoaded / duration / 1024 / 1024).toFixed(2);
-            if (speedElem) speedElem.textContent = speedMbps + ' Mbps';
-        } catch {
-            if (speedElem) speedElem.textContent = 'N/A';
-        }
-        setTimeout(testSpeed, 15000); // update every 15s
+// ─── Typing animation ────────────────────────────────────────────────────────
+
+const typingLines = [
+    'Computer Science @ Virginia Tech',
+    'AI & Machine Learning Developer',
+    'Software Engineering Intern',
+    'Data Analytics Enthusiast',
+];
+
+let lineIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+function startTyping() {
+    const elem = document.getElementById('typing-text');
+    if (!elem) return;
+
+    const line = typingLines[lineIndex];
+
+    if (deleting) {
+        elem.textContent = line.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        elem.textContent = line.substring(0, charIndex + 1);
+        charIndex++;
     }
-    testSpeed();
-})();
+
+    let delay = deleting ? 45 : 75;
+
+    if (!deleting && charIndex === line.length) {
+        delay = 2200;
+        deleting = true;
+    } else if (deleting && charIndex === 0) {
+        deleting = false;
+        lineIndex = (lineIndex + 1) % typingLines.length;
+        delay = 350;
+    }
+
+    setTimeout(startTyping, delay);
+}
+
